@@ -16,9 +16,9 @@ export async function printTasks() {
 
     tasks.forEach((task) =>
       content.push([
-        "",
+        task.id,
         task.task_url,
-        task.task.name,
+        task.task.name.substring(0, 25),
         new Date(task.end * 1).toUTCString(),
         getDuration(task.start, task.end, "nice"),
       ]),
@@ -29,7 +29,7 @@ export async function printTasks() {
       "",
       "",
       "",
-      `sum: ${new Date(tasks.reduce((acc, task) => acc + (task.end - task.start), 0)).getHours()}h`,
+      `sum: ${new Date(tasks.reduce((acc, task) => acc + (task.end - task.start), 0)).getHours()}h ${(new Date(tasks.reduce((acc, task) => acc + (task.end - task.start), 0)).getMinutes())%60}m`,
     ]);
     console.log(table(content));
   });

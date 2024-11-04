@@ -1,11 +1,10 @@
-import axios from 'axios';
 
 export async function req(url: string): Promise<any> {
-  const headers = {
+  const responce = await fetch(url, {headers:{
+    "Method": "GET",
     "Accept": "application/json",
     "AcceptEncoding": "gzip, deflate",
     "Authorization": process.env.API_KEY,
-  };
-  const response = await axios.get(url, { headers });
-  return response.data;
+  }})
+  return await responce.json()
 }
